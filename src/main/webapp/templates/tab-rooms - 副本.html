@@ -1,0 +1,168 @@
+﻿
+<ion-view>
+    <ion-content class="home-body">
+        <div class="main_wrap">
+            <div class="header">
+                <div class="container clearfix">
+                    <a href="javascript:alert('版权所有 财神娱乐 公平公正')" class="go_home"><!--返回首页--></a>
+                    <div id="main_title">
+                        <h1 style="color: white">财神娱乐</h1>
+                        <p>在线人数({{onlineCount}})</p>
+                    </div>
+                     
+                </div>
+            </div>
+            <div class="notice">
+                <div class="notice_inner">
+                    <ul>
+                        <li style="line-height: 30px;    height: 30px;">
+                            <marquee behavior="scroll">欢迎来到[财神娱乐]、真人24小时对决、防逃包、防窥包、秒到账！</marquee>
+                            <div id="scrollobj" style="white-space:nowrap;overflow:hidden;"><span></span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+<!--            <div class="home-slide">
+          <div class="home-slide">
+                <ion-slide-box slide-interval=3000 auto-play=true does-continue="true">
+                    <ion-slide>
+                        <div class="home-cover">
+                            <div class="wrapper">
+                                <img src="/img/home/banner_1.png">
+                            </div>
+                        </div>
+                    </ion-slide>
+                    <ion-slide>
+                        <div class="home-cover">
+                            <div class="wrapper">
+                                <img src="/img/home/banner_2.png">
+                            </div>
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
+            </div>-->
+            <div class="home-cover">
+                <div class="wrapper">
+                    <div class="marquee" ng-class="{'run':run}">
+                        <img ng-src="{{img}}" ng-repeat="img in marquee">
+                    </div>
+                </div>
+            </div>
+            <div class="module game"  ng-repeat="gameType in gameTypes" ng-if="rooms[gameType.key] && rooms[gameType.key].length">
+                <div class="inner">					
+                    <div class="game_img" ng-click="showGameType(gameType.key)">
+                        <a href="">
+                            <img ng-src="{{'img/home/game_'+ gameType.key  +'.png'}}"/>
+                            <div class="text">
+                                <div class="inner">
+                                    <h2 class="gaime_title">{{gameType.text}}</h2>
+                                    <p>进入游戏</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="details clearfix"  ng-show="gameTypeHideStatus.showType == gameType.key">
+                        <div class="row" ng-repeat="row in rooms[gameType.key]">
+                            <div class="col" ng-repeat="room in row" ng-click=join(room)>
+                                <div class="col_inner">
+                                    <img ng-src="{{room.roomimg}}" />
+                                    <!--<img ng-src="{{'img/home/game_icon_'+ gameType.key  +'.png'}}"/> -->
+                                    <h3>{{room.name}}</h3>
+									<p>无免死 防跑包 防窥包</p>
+                                    <!--<p>当前在线:{{room.position}}/{{room.limitNum}}人</p> -->
+                                </div>
+                            </div>
+                            <div class="col" ng-if="row.length < 2">
+                            </div>
+                            <div class="col" ng-if="row.length < 3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--
+            <div class="module rank clearfix">
+                <div class="col_wrap">
+                    <div class="col">
+                        <div class="col_inner">
+                            <a href="#">
+                                <img src="img/icon/rank.png" />
+                                <div class="text">
+                                    <div class="inner">
+                                        <h5>排行榜</h5>
+                                        <p>问天下英雄几许</p>
+                                        <p>看排行谁人第一</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="col_inner">
+                            <a href="#">
+                                <img src="img/icon/cup.png" />
+                                <div class="text">
+                                    <div class="inner">
+                                        <h5>奖池</h5>
+                                        <p>万贯腰缠何足论</p>
+                                        <p>千载难逢在奖池</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+-->
+
+
+
+
+        <!--<div>-->
+            <!--<div class="home-nav">-->
+                <!--<div class="home-title"></div>-->
+            <!--</div>-->
+            <!--<div class="home-cover">-->
+                <!--<div class="wrapper">-->
+                    <!--<div class="marquee" ng-class="{'run':run}">-->
+                        <!--<img ng-src="{{img}}" ng-repeat="img in marquee">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+<!--        <ion-list>
+            <ion-item ng-repeat="gameType in gameTypes" class="game-group"
+                      ng-if="rooms[gameType.key] && rooms[gameType.key].length">
+                <div class="game-type-bar clearfix">
+                    <div class="game-icon clearfix">
+                        <div class="group-icon" ng-class="rooms[gameType.key + '.icon']"></div>
+                        <div class="group-title">
+                            <span class="group-name">{{gameType.text}}</span>
+                            <span class="group-count">人数 {{rooms[gameType.key + '.totalOnline']}} 人</span>
+                        </div>
+                    </div>
+                    <div class="group-collapse clearfix" ng-click="collapseRoomGroup(gameType.key)">
+                        <i ng-class="{true: 'expand', false: 'collapse', undefined: 'expand'}[gameTypeHideStatus[gameType.key]]"></i>
+                    </div>
+                </div>
+                <div class="home-rooms" ng-show="!gameTypeHideStatus[gameType.key]" >
+                    <div class="room-row" ng-repeat="row in rooms[gameType.key]">
+                        <div class="home-room clearfix" ng-repeat="room in row" ng-click=join(room)>
+                            <div class="room-icon" ng-class="rooms[gameType.key + '.icon']"></div>
+                            <div class="room-info">
+                                <div class="room-name">{{room.name}}</div>
+                                <div class="room-limit">
+                                    在线:{{room.position}}/{{room.limitNum}}人
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>-->
+    </ion-content>
+</ion-view>
